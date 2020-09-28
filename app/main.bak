@@ -1,0 +1,25 @@
+
+import os #import os
+from flask import Flask #import flask 
+from flask_sqlalchemy import SQLAlchemy #import flask_sqlalchemy
+
+app = Flask(__name__) 
+
+def get_env_variable(name):
+    try:
+        return os.environ[name]
+    except KeyError:
+        message = "Expected environment variable '{}' not set.".format(name)
+        raise Exception(message)
+
+# the values of those depend on your setup
+POSTGRES_URL = get_env_variable("DATABASE_HOST")
+POSTGRES_USER = get_env_variable("DATABASE_USER")
+POSTGRES_PW = get_env_variable("DATABASE_PASS")
+POSTGRES_DB = get_env_variable("DATABASE_DB")
+POSTGRES_PORT = get_env_variable("DATABASE_PORT")
+
+
+@app.route("/") 
+def home_view(): 
+	return "<h1>Welcome to Geeks for Geeks...123</h1>"
